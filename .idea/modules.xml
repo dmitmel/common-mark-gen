@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Scripts.iml" filepath="$PROJECT_DIR$/Scripts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common-mark-gen.iml" filepath="$PROJECT_DIR$/common-mark-gen.iml" />
     </modules>
   </component>
 </project>
