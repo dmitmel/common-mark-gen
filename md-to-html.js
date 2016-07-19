@@ -14,7 +14,21 @@ var md = require('markdown-it')({
 
     highlight: function (str, lang) {
         try {
-            return hljs.highlight(lang, str).value;
+            var highlightedCode = hljs.highlight(lang, str).value;
+
+            // Removing newline char which was added by highlight.js to the end (if it was added)
+            var lastIndex = highlightedCode.length - 1;
+            var lastChar = highlightedCode[lastIndex];
+            if (lastChar == '\n')
+                highlightedCode = highlightedCode.substring(0, lastIndex);
+
+
+            // Removing space char which was added by highlight.js to the start (if it was added)
+            var firstChar = highlightedCode[0];
+            if (firstChar == ' ')
+                highlightedCode = highlightedCode.substring(1);
+
+            return highlightedCode;
         } catch (__) {
             return ''; // use external default escaping
         }

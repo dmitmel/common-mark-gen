@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+#
+
 pretty-print-array() {
     array=$@
 
@@ -16,7 +18,7 @@ cat << EOF
 Welcome to CommonMark generator installer!
 It'll automatically install generator script and all it's dependencies, if they're missing.
 
-To make script work normally, this installer will install:
+It'll install this things:
 1. Ruby
 2. Node.js
 3. JavaScript libraries:
@@ -27,6 +29,8 @@ To make script work normally, this installer will install:
     3.5. markdown-it-sub
     3.6. markdown-it-sup
 4. Github's Markdown CSS style to $COMMON_MARK_GEN_HOME/github-markdown-view-style.css
+6: installing CommonMark helper generator script
+7: installing CommonMark main generator script
 
 Press any key to continue or ctrl+c to exit.
 EOF
@@ -37,7 +41,7 @@ clear
 
 echo "Step 1: installing Ruby"
 echo
-if [ "`which ruby`" == "" ]; then
+if [ "$(which ruby)" == "" ]; then
     echo "Ruby isn't installed on your machine."
     echo
 
@@ -68,7 +72,7 @@ clear
 
 echo "Step 2: installing Node.js"
 echo
-if [ "`which node`" == "" ]; then
+if [ "$(which node)" == "" ]; then
     echo "Node.js isn't installed on your machine."
     echo
 
@@ -114,7 +118,7 @@ $libs"
 echo
 install-lib() {
     lib_name=$1
-    [ "`npm list | grep $lib_name`" == "" ] && npm install $lib_name
+    [ "$(npm list | grep $lib_name)" == "" ] && npm install $lib_name
 }
 for lib in $libs; do
     install-lib $lib
@@ -124,20 +128,19 @@ clear
 
 echo "Step 4: installing Github's Markdown CSS style"
 echo
-DEST_FILE="$COMMON_MARK_GEN_HOME/github-markdown-view-style.css"
+DEST_FILE="$COMMON_MARK_GEN_HOME/github-markdown.css"
 curl https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css -o $DEST_FILE
 clear
 
-echo "Step 5: installing CommonMark main generator script"
-echo
-DEST_FILE="$COMMON_MARK_GEN_HOME/common-mark-gen"
-curl https://raw.githubusercontent.com/dmitmel/common-mark-gen/master/common-mark-gen.rb -o $DEST_FILE
-chmod +x $DEST_FILE
-clear
-
-
-echo "Step 6: installing CommonMark helper generator script"
+echo "Step 5: installing CommonMark helper generator script"
 echo
 DEST_FILE="$COMMON_MARK_GEN_HOME/md-to-html.js"
 curl https://raw.githubusercontent.com/dmitmel/common-mark-gen/master/md-to-html.js -o $DEST_FILE
+clear
+
+echo "Step 6: installing CommonMark main generator script"
+echo
+DEST_FILE="$COMMON_MARK_GEN_HOME/common-mark-gen"
+curl https://raw.githubusercontent.com/dmitmel/common-mark-gen/master/common-mark-gen.sh -o $DEST_FILE
+chmod +x $DEST_FILE
 clear
