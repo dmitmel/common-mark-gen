@@ -29,8 +29,8 @@ It'll install this things:
     3.5. markdown-it-sub
     3.6. markdown-it-sup
 4. Github's Markdown CSS style to $COMMON_MARK_GEN_HOME/github-markdown-view-style.css
-6: installing CommonMark helper generator script
-7: installing CommonMark main generator script
+5. installing CommonMark helper generator script
+6. installing CommonMark main generator script
 
 Press any key to continue or ctrl+c to exit.
 EOF
