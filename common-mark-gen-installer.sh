@@ -131,7 +131,7 @@ clear
 echo "Step 5: installing CommonMark main generator script"
 echo
 DEST_FILE="$COMMON_MARK_GEN_HOME/common-mark-gen"
-curl https://gist.githubusercontent.com/dmitmel/aa086d051e2b13c11f311f0d5c6a4939/raw/32d5f0a7b2a227bfd8b392b3d85b8b6d432a9ad1/common-mark-gen.rb -o $DEST_FILE
+curl https://raw.githubusercontent.com/dmitmel/common-mark-gen/master/common-mark-gen.rb -o $DEST_FILE
 chmod +x $DEST_FILE
 clear
 
@@ -139,5 +139,5 @@ clear
 echo "Step 6: installing CommonMark helper generator script"
 echo
 DEST_FILE="$COMMON_MARK_GEN_HOME/md-to-html.js"
-curl https://gist.githubusercontent.com/dmitmel/aa086d051e2b13c11f311f0d5c6a4939/raw/567cf0f08e3bb45520d44ed0a3ccd623810bb6e2/md-to-html.js -o $DEST_FILE
+curl https://raw.githubusercontent.com/dmitmel/common-mark-gen/master/md-to-html.js -o $DEST_FILE
 clear
