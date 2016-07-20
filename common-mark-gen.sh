@@ -3,24 +3,8 @@
 # Command-line utility for generating HTML from Markdown file according to Github/CommonMark Markdown rules and using
 # plugins/extensions.
 
-get_script_dir() {
-    SCRIPT_PATH="${BASH_SOURCE[0]}";
-    if [ -h "${SCRIPT_PATH}" ]; then
-        while [ -h "${SCRIPT_PATH}" ]; do
-            SCRIPT_PATH=`readlink "${SCRIPT_PATH}"`
-        done
-    fi
-
-    pushd . > /dev/null
-    cd `dirname ${SCRIPT_PATH}` > /dev/null
-    SCRIPT_PATH=`pwd`
-    popd > /dev/null
-
-    echo $SCRIPT_PATH
-}
-
-MD_TO_HTML_JS="$(get_script_dir)/md-to-html.js"
 COMMON_MARK_GEN_HOME="$HOME/.common-mark-gen"
+MD_TO_HTML_JS="$COMMON_MARK_GEN_HOME/md-to-html.js"
 DEFAULT_DOC_STYLE="file://$COMMON_MARK_GEN_HOME/github-markdown.css"
 DEFAULT_CODE_STYLE="file://$HOME/node_modules/highlight.js/styles/github-gist.css"
 
@@ -68,7 +52,7 @@ print_version() {
 
 print_error() {
     print_usage >&2
-    echo "$0: $1" >&2
+    echo "common-mark-gen: $1" >&2
     exit 1
 }
 
@@ -77,7 +61,7 @@ CODE_STYLE=$DEFAULT_CODE_STYLE
 
 if [ $# == 0 ]; then
     print_usage >&2
-    echo "try '$0 -h' or '$0 --help' for more information" >&2
+    echo "try 'common-mark-gen -h' or 'common-mark-gen --help' for more information" >&2
     exit
 fi
 
@@ -105,8 +89,6 @@ while true; do
                     INPUT_FILE="$1"
                     [ ! -f "$INPUT_FILE" ] && print_error "$INPUT_FILE: no such file or directory"
                     [ -d "$INPUT_FILE" ]   && print_error "$INPUT_FILE: is a directory"
-
-                    OUTPUT_FILE="$(basename "$INPUT_FILE" | cut -d. -f1).html"
                 elif [ -z "$OUTPUT_FILE" ]; then
                     OUTPUT_FILE="$1"
                 else
@@ -119,6 +101,7 @@ while true; do
 done
 
 [ -z "$INPUT_FILE" ] && print_error "no input file specified"
+[ -z "$OUTPUT_FILE" ] && OUTPUT_FILE="$(basename "$INPUT_FILE" | cut -d. -f1).html"
 
 here_doc_to_var() {
     IFS='\n'
@@ -131,10 +114,10 @@ if [ -z "$ONE_FILE" ]; then
     <link rel="stylesheet" href="$CODE_STYLE">
 HTML_DEPENDENCIES
 else
-    echo "Downloading document style data..." >&2
-    DOC_STYLE_DATA="$(curl $DOC_STYLE)"
-    echo -e "\nDownloading code style data..." >&2
-    CODE_STYLE_DATA="$(curl $CODE_STYLE)"
+    DOC_STYLE_DATA="$(curl  --silent $DOC_STYLE)"
+    [ "$?" != 0 ] && print_error "Failed to download document style!"
+    CODE_STYLE_DATA="$(curl --silent $CODE_STYLE)"
+    [ "$?" != 0 ] && print_error "Failed to download code style!"
 
     here_doc_to_var HTML_DEPENDENCIES <<HTML_DEPENDENCIES
     <style>
