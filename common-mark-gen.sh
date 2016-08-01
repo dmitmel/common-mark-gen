@@ -25,8 +25,7 @@ Markdown rules and using plugins/extensions.
 
 positional arguments:
   INPUT_FILE            input file with Markdown
-  OUTPUT_FILE           output file with HTML, defaults to
-                        \${name of INPUT_FILE without extension}.html
+  OUTPUT_FILE           output file with HTML, defaults to \$INPUT_FILE.html
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -101,7 +100,7 @@ while true; do
 done
 
 [ -z "$INPUT_FILE" ] && print_error "no input file specified"
-[ -z "$OUTPUT_FILE" ] && OUTPUT_FILE="$(basename "$INPUT_FILE" | cut -d. -f1).html"
+[ -z "$OUTPUT_FILE" ] && OUTPUT_FILE="$INPUT_FILE.html"
 
 here_doc_to_var() {
     IFS='\n'
