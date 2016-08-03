@@ -24,5 +24,5 @@ common-mark-gen README.md              # Will generate README.md.html
 |---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `-p`, `--print-result`    | print result                                                                                                                                         |
 | `-1`, `--one-file`        | put all CSS to generated HTML file                                                                                                                   |
-| `--doc-style DOC_STYLE`   | path to CSS file with styles for document (e.g. headers, code boxes, etc), defaults to `file://.common-mark-gen/highlight.js/github-markdown.css`    |
-| `--doc-style DOC_STYLE`   | path to CSS file with styles for code highlighting (used by highlight.js), defaults to `file://.common-mark-gen/highlight.js/styles/github-gist.css` |
+| `--doc-style DOC_STYLE`   | path to CSS file with styles for document (e.g. headers, code boxes, etc), defaults to `file://$HOME/.common-mark-gen/highlight.js/github-markdown.css`    |
+| `--doc-style DOC_STYLE`   | path to CSS file with styles for code highlighting (used by highlight.js), defaults to `file://$HOME/.common-mark-gen/highlight.js/styles/github-gist.css` |
