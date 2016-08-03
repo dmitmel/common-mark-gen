@@ -35,17 +35,32 @@ var md = require('markdown-it')({
     }
 });
 
-var pluginNames = ['sub', 'sup', 'abbr', 'checkbox'];
-for (var index in pluginNames) {
-    var longName = 'markdown-it-' + pluginNames[index];
-    var plugin = require(longName);
-    md.use(plugin);
+var plugins = {
+    'sub': {},
+    'sup': {},
+    'abbr': {},
+    'checkbox': {},
+    'anchor': {
+        permalink: true,
+        permalinkSymbol: '\uD83D\uDD17',    // Link symbol - http://graphemica.com/%F0%9F%94%97
+        permalinkBefore: true
+
+    }
+};
+
+for (var pluginName in plugins) {
+    var fullName = 'markdown-it-' + pluginName;
+    var plugin = require(fullName);
+    var pluginOptions = plugins[pluginName];
+    md.use(plugin, pluginOptions);
 }
 
 fs = require('fs');
 fs.readFile(process.argv[2], 'utf8', function (error, data) {
-    if (error)
-        return console.log(error);
+    if (error) {
+        console.log(error);
+        return;
+    }
     var parsedMd = md.render(data);
     console.log(parsedMd);
 });

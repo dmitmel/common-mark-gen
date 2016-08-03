@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Command-line utility for generating HTML from Markdown file according to Github/CommonMark Markdown rules and using
-# plugins/extensions.
+# Command-line utility for generating pretty GitHub-like HTML from Markdown with CommonMark (http://commonmark.org/)
+# syntax.
 
 COMMON_MARK_GEN_HOME="$HOME/.common-mark-gen"
 MD_TO_HTML_JS="$COMMON_MARK_GEN_HOME/md-to-html.js"
@@ -20,8 +20,8 @@ print_help() {
     print_usage
 
     cat <<HELP
-Command-line utility for generating HTML from Markdown file according to Github's/CommonMark's
-Markdown rules and using plugins/extensions.
+Command-line utility for generating pretty GitHub-like HTML from Markdown with
+CommonMark http://commonmark.org/) syntax.
 
 positional arguments:
   INPUT_FILE            input file with Markdown
@@ -30,8 +30,8 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -v, --version         show program's version number and exit
-  -p, --print-result    print result when finished
-  -1, --one-file        put dependencies to generated HTML file
+  -p, --print-result    print result
+  -1, --one-file        put CSS to generated HTML file
   --doc-style DOC_STYLE
                         path to CSS file with styles for document (e.g.
                         headers, code boxes, etc), defaults to
@@ -81,7 +81,7 @@ while true; do
                        shift ;;
 
         # Other arguments
-        * ) if [[ "$1" =~ "-" ]]; then
+        * ) if [[ "$1" =~ "^-" ]]; then
                 print_error "option $1: is unknown"
             else
                 if [ -z "$INPUT_FILE" ]; then
@@ -156,6 +156,14 @@ $(echo -e "$HTML_DEPENDENCIES")
 
         :before, :after {
             content: none !important;
+        }
+
+        .header-anchor {
+            opacity: 0;
+        }
+
+        .header-anchor:hover {
+            opacity: 1;
         }
     </style>
 </html>

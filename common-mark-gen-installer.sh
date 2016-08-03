@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 
-#
-
-pretty-print-array() {
-    array=$@
-
-    for value in $array; do
-        printf "%-s\n" "$value"
-    done | column
-}
 
 COMMON_MARK_GEN_HOME="$HOME/.common-mark-gen"
 mkdir $COMMON_MARK_GEN_HOME
@@ -28,6 +19,7 @@ It'll install this things:
     3.4. markdown-it-checkbox
     3.5. markdown-it-sub
     3.6. markdown-it-sup
+    3.7. markdown-it-anchor
 4. Github's Markdown CSS style to $COMMON_MARK_GEN_HOME/github-markdown-view-style.css
 5. installing CommonMark helper generator script
 6. installing CommonMark main generator script
@@ -112,7 +104,8 @@ markdown-it
 markdown-it-abbr
 markdown-it-checkbox
 markdown-it-sub
-markdown-it-sup"
+markdown-it-sup
+markdown-it-anchor"
 echo "Step 3: installing JavaScript libraries:
 $libs"
 echo
