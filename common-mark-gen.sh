@@ -129,7 +129,7 @@ $(echo "$CODE_STYLE_DATA" | sed 's/^/        /')
 HTML_DEPENDENCIES
 fi
 
-MARKDOWN=$(node "$MD_TO_HTML_JS" "$INPUT_FILE")
+MARKDOWN="$(node "$MD_TO_HTML_JS" "$INPUT_FILE")"
 
 here_doc_to_var HTML <<HTML
 <!DOCTYPE html>
