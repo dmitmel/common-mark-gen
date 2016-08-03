@@ -35,11 +35,11 @@ optional arguments:
   --doc-style DOC_STYLE
                         path to CSS file with styles for document (e.g.
                         headers, code boxes, etc), defaults to
-                        file://$COMMON_MARK_GEN_HOME/highlight.js/github-markdown.css
+                        $DEFAULT_DOC_STYLE
   --code-style CODE_STYLE
                         path to CSS file with styles for code highlighting
                         (used by highlight.js), defaults to
-                        file://$COMMON_MARK_GEN_HOME/highlight.js/styles/github-gist.css
+                        $DEFAULT_CODE_STYLE
 HELP
     exit
 }
@@ -162,6 +162,17 @@ $(echo -e "$HTML_DEPENDENCIES")
             opacity: 0;
         }
 
+        .header-anchor:link    { text-decoration: none !important; }
+        .header-anchor:visited { text-decoration: none !important; }
+        .header-anchor:hover   { text-decoration: none !important; }
+        .header-anchor:active  { text-decoration: none !important; }
+
+        h1:hover .header-anchor,
+        h2:hover .header-anchor,
+        h3:hover .header-anchor,
+        h4:hover .header-anchor,
+        h5:hover .header-anchor,
+        h6:hover .header-anchor,
         .header-anchor:hover {
             opacity: 1;
         }
